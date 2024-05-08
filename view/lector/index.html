@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="../../javascript/plugins/qrCode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <div class="container text-center">
+
+        <div class="row justify-content-center mt-5 ">
+            <div class="col-sm-4 shadow p-5">
+                <h5 class="text-center">Escanear codigo QR</h5>
+                <div class="row text-center">
+                    <a id="btn-scan-qr" href="#">
+                        <img src="https://static.thenounproject.com/png/1433173-200.png" class="img-fluid text-center"
+                            width="175">
+                    </a>
+                    <canvas hidden="" id="qr-canvas" class="img-fluid"></canvas>
+                </div>
+                <div class="row mx-5 my-3">
+                    <button class="btn btn-success btn-sm rounded-3 mb-2" onclick="encenderCamara()">Encender
+                        camara</button>
+                    <button class="btn btn-danger btn-sm rounded-3" onclick="cerrarCamara()">Detener camara</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-4 ">
+            <div class="card-header">
+                <h3>INFORMACION</h3>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Superheroe</th>
+                            <th scope="col"> Nombre Real</th>
+                            <th scope="col">Altura CM</th>
+                            <th scope="col">Peso KG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <audio id="audioScaner" src="../../javascript/plugins/sonido.mp3"></audio>
+    <script src="../../javascript/lectorqr.js"></script>
+</body>
+
+</html>

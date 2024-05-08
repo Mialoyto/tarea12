@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador QR</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 
+      lector código barra = unidimensionales (lineales)
+      QR = bidimensionales 
+     -->
+      <div class="card mt-2">
+        <div class="card-body">
+          <form action="" id="form-qr" autocomplete="off">
+            <div class="row">
+              <div class="col-md-5 mb-2">
+                <label for="texto" class="form-label">Texto</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="texto"
+                  autofocus
+                  required
+                />
+              </div>
+
+              <div class="col-md-2 mb-2">
+                <label for="calidad" class="form-label">Calidad</label>
+                <select
+                  name="calidad"
+                  id="calidad"
+                  class="form-select"
+                  required
+                >
+                  <option value="" selected>Seleccione</option>
+                  <option value="L">Baja</option>
+                  <option value="M">Media</option>
+                  <option value="H">Alta</option>
+                  <option value="B">La mejor</option>
+                </select>
+              </div>
+
+              <div class="col-md-2 mb-2">
+                <label for="tamano" class="form-label">Tamaño QR</label>
+                <input
+                  required
+                  id="tamano"
+                  type="number"
+                  min="10"
+                  max="50"
+                  step="5"
+                  value="20"
+                  class="form-control text-center"
+                />
+              </div>
+
+              <div class="col-md-2 mb-2">
+                <label for="borde" class="form-label">Tamaño de borde</label>
+                <input
+                  required
+                  id="borde"
+                  type="number"
+                  min="1"
+                  max="10"
+                  step="1"
+                  value="3"
+                  class="form-control text-center"
+                />
+              </div>
+
+              <div class="col-md-1">
+                <div class="d-grid">
+                  <label for="borde" class="form-label">QR</label>
+                  <button class="btn btn-primary" type="submit">QR</button>
+                </div>
+              </div>
+            </div>
+            <!-- Fin row -->
+          </form>
+
+          <div id="visor" class="text-center"></div>
+        </div>
+      </div>
+    </div>
+    <!-- fin container -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const visor = document.querySelector("#visor");
+        document
+          .querySelector("#form-qr")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const params = new URLSearchParams();
+            params.append("operacion", "QR");
+            params.append("texto", document.querySelector("#texto").value);
+            params.append("calidad", document.querySelector("#calidad").value);
+            params.append("tamano", document.querySelector("#tamano").value);
+            params.append("borde", document.querySelector("#borde").value);
+
+            fetch(`../controllers/qrservices.php?${params}`)
+              .then((response) => response.text())
+              .then((data) => {
+                console.log(data);
+                visor.innerHTML = ``;
+                // const tagImg = document.createElement("img")
+                // tagImg.src = `./imagenes/${data}`;
+                // visor.appendChild(tagImg);
+
+                visor.innerHTML = `${data}`;
+              })
+              .catch();
+          });
+      });
+    </script>
+  </body>
+</html>
